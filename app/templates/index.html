@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}Slog{% endblock %}
+
+{% block page_content %}
+<div class="center" style="text-align: center">
+    <h1>Slog</h1>
+    {{ wtf.quick_form(searchf) }}
+</div>
+<div>
+    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+    {{ wtf.quick_form(form) }}
+    {% endif %}
+</div>
+{% if postu %}
+<div class="posts">
+    {% for user in postu %}
+    <br>
+    <li class="post">
+        <div class="post-thumbnail">
+            <a href="{{ url_for('.user', username=user.username) }}">
+                <img class="img-rounded profile-thumbnail" src="{{user.gravatar(size=40)}}">
+            </a>
+        </div>
+        <div class="post-content">
+            <div class="post-author"><a href="{{url_for('.user', username=user.username)}}">{{user.username}}</a></div>
+            <div class="text">{{user.self_info}}</div>
+        </div>
+    </li>
+    {% endfor %}
+</div>
+{% endif %}
+{% if posts %}
+{% include "_posts.html" %}
+{% if paginationa %}
+<div class="pagination" style="text-align: center">
+    {{macros.pagination_widget(paginationa, '.index')}}
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}
+{% block scripts %}
+    {{super()}}
+    {{pagedown.include_pagedown()}}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Slog - Register{% endblock %}
+
+{% block page_content %}
+<div class="page-header" style="text-align: center">
+    <h1>Register</h1><br>
+</div>
+<div class="center" style="text-align: center">
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}

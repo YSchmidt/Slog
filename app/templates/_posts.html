@@ -1,0 +1,46 @@
+<div class="posts">
+    {% for post in posts %}
+    {% if post.visible or post.author == current_user
+        or post.author.role.id in [1, 2]%}
+    <br>
+    <li class="post">
+        <div class="post-thumbnail">
+            <a href="{{ url_for('.user', username=post.author.username) }}">
+                <img class="img-rounded profile-thumbnail" src="{{post.author.gravatar(size=40)}}">
+            </a>
+        </div>
+        <div class="post-content">
+            <div class="post-data">{{moment(post.postime).format('LLL')}}</div>
+            <div class="post-author"><a href="{{url_for('.user', username=post.author.username)}}">{{post.author.username}}</a></div>
+            <div class="post-body">
+                {% if post.body_html %}
+                    ##{{post.title}}
+                {% else %}
+                    {{post.title}}
+                {% endif %}
+            </div>
+            <div class="post-footer">
+                {% if current_user == post.author %}
+                <a href="{{url_for('.edit_post', id=post.id)}}">
+                    <span class="label label-success">Edit</span>
+                </a>
+                <a href="{{url_for('.delete_post', id=post.id)}}">
+                    <span class="label label-primary">Delete</span>
+                </a>
+                {% elif current_user.can(Permission.ADMINISTER) %}
+                <a href="{{url_for('.edit_post', id=post.id)}}">
+                    <span class="label-warning">Edit for Administrator</span>
+                </a>
+                <a href="{{url_for('.delete_post', id=post.id)}}">
+                    <span class="label label-danger">Delete for Administrator</span>
+                </a>
+                {% endif %}
+                <a href="{{url_for('.article', id=post.id)}}">
+                    <span class="label label-default">More</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    {% endif %}
+    {% endfor %}
+</div>
