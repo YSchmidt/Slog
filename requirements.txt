@@ -89,7 +89,7 @@ pexpect==4.0.1
 Pillow==3.1.2
 plainbox==0.25
 prettytable==0.7.2
-psutil==4.3.1
+psutil==5.6.6
 ptyprocess==0.5
 py2exe==0.9.2.2
 pyasn1==0.1.9
