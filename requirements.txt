@@ -86,7 +86,7 @@ pathlib==1.0.1
 pbr==1.10.0
 pefile==2016.3.28
 pexpect==4.0.1
-Pillow==3.1.2
+Pillow==9.0.0
 plainbox==0.25
 prettytable==0.7.2
 psutil==4.3.1
