@@ -65,7 +65,7 @@ language-selector==0.1
 lazy-object-proxy==1.2.2
 louis==2.6.4
 lxml==3.5.0
-Mako==1.0.3
+Mako==1.2.2
 Markdown==2.6.7
 MarkupSafe==0.23
 matplotlib==1.5.3
